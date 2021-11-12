@@ -1,28 +1,6 @@
-<%@page import="com.mysql.cj.xdevapi.Statement"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file = "sql_open.jsp" %>
 <%
-/*
-request.setCharacterEncoding("UTF-8"); // 한글 처리
-Connection conn = null;
-ResultSet rs = null;
-Statement stmt = conn.createStatement(); 
-//pstmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-
-Class.forName("com.mysql.cj.jdbc.Driver"); //mysql 드라이버 로딩
-//String jdbcUrl = "jdbc:mysql://localhost:3306/jsp2021?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-String jdbcUrl = "jdbc:mysql://localhost:3306/web_sns?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false";
-
-String dbId = "jspid";
-String dbPass = "jsppass";
-
-request.setCharacterEncoding("utf-8"); // 한글 처리
-conn = DriverManager.getConnection(jdbcUrl, dbId, dbPass);
-*/
 	int member_seq = 0; //관광지 좋아요 하는데 필요한 회원 번호
 	if((Integer)session.getAttribute("seq") != null){
 		member_seq = (Integer)session.getAttribute("seq");
@@ -38,71 +16,62 @@ conn = DriverManager.getConnection(jdbcUrl, dbId, dbPass);
 	String sql = "select seq, thumbnail, place_name, simple_content, place_hit from tour";
 		if(search != null){
 			//sql = sql + "WHERE place_name LIKE(?)";
-			sql = "select seq, thumbnail, place_name, simple_content from tour WHERE place_name LIKE(?)";
+			sql = "select seq, thumbnail, place_name, simple_content, place_hit from tour WHERE place_name LIKE(?)";
 		}
-	pstmt = conn.prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-		if(search != null) {
-			pstmt.setString(1, "%" + search + "%");
+		pstmt = conn.prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			if(search != null) {
+				pstmt.setString(1, "%" + search + "%");
+			}
+		rs = pstmt.executeQuery();
+		
+		int totalCount = 0;
+		
+		rs.last();
+		int rowCount = rs.getRow(); //tour테이클 컬럼카운트
+		rs.beforeFirst();
+		System.out.print(rowCount);
+		
+		String pageNum = request.getParameter("pageNum");//넘어온 페이지 번호
+		int currentPage = 1; // 첫시작시 현재 페이지
+		int currentPageSetup; // 이전버튼누를시 이동할 페이지
+		int currentPageNext; // 다음버튼 누를시 이동할 페이지
+		int startPage; // 이 화면에서 보여줄 페이지중에서 가장 앞페이지
+		int endPage;
+
+		if(pageNum!=null){
+			currentPage = Integer.parseInt(pageNum); //넘어온 페이지번호가 존재할경우 현재페이지에 값 넣어주기	
 		}
-	rs = pstmt.executeQuery();
-	
-	int totalCount = 0;
-	
-	sql = "select count(seq) as cnt from tour";
-	pstmt = conn.prepareStatement(sql);
-	ResultSet rs3 = pstmt.executeQuery();
-	rs3.next();
-	
-	rs.last();
-	int rowCount = rs.getRow(); //tour테이클 컬럼카운트
-	rs.beforeFirst();
-	System.out.print(rowCount);
-	
-	String pageNum = request.getParameter("pageNum");//넘어온 페이지 번호
-	int currentPage = 1; // 첫시작시 현재 페이지
-	int currentPageSetup; // 이전버튼누를시 이동할 페이지
-	int currentPageNext; // 다음버튼 누를시 이동할 페이지
-	int startPage; // 이 화면에서 보여줄 페이지중에서 가장 앞페이지
-	int endPage;
-	
-	
-	
-	if(pageNum!=null){
-		currentPage = Integer.parseInt(pageNum); //넘어온 페이지번호가 존재할경우 현재페이지에 값 넣어주기	
-	}
 
-	int pageLimit = 10; //한번에 보이는 페이지수
-	int tourLimit = 12; //한페이지에 보이는 게시물
+		int pageLimit = 10; //한번에 보이는 페이지수
+		int tourLimit = 12; //한페이지에 보이는 게시물
 
-	int totalPage = rowCount / tourLimit; //전체 페이지
-	if(rowCount % tourLimit != 0){ //나머지가 0이 아니면 페이지 하나 더만듬
-		totalPage++;
-	}
-	
-	int start = (currentPage-1) * tourLimit +1; //db에서 가져올 rownum의 시작
-	int end = currentPage * tourLimit; //db에서 가져올 rownum의 끝
-	
-	currentPageSetup = (currentPage/pageLimit) * pageLimit; // (n+0)*pageLimit +1 부터 (n+1)*pageLimit까지는 n*10 ...
-	if(currentPage % pageLimit == 0){
-		currentPageSetup = currentPageSetup - pageLimit ;
-	}
+		int totalPage = rowCount / tourLimit; //전체 페이지
+		if(rowCount % tourLimit != 0){ //나머지가 0이 아니면 페이지 하나 더만듬
+			totalPage++;
+		}
+		
+		int start = (currentPage-1) * tourLimit +1; //db에서 가져올 rownum의 시작
+		int end = currentPage * tourLimit; //db에서 가져올 rownum의 끝
+		
+		currentPageSetup = (currentPage/pageLimit) * pageLimit; // (n+0)*pageLimit +1 부터 (n+1)*pageLimit까지는 n*10 ...
+		if(currentPage % pageLimit == 0){
+			currentPageSetup = currentPageSetup - pageLimit ;
+		}
 
-	currentPageNext = (currentPage/pageLimit) * pageLimit + pageLimit + 1;
-	if(currentPage % pageLimit == 0){
-		currentPageNext = currentPageNext - pageLimit;
-	}
-	
-	startPage = currentPageSetup + 1;
-	endPage = startPage + (pageLimit - 1);
-	if(startPage == totalPage){
-		endPage = startPage;
-	}
-	if(endPage > totalPage){
-		endPage = totalPage;
-	}
+		currentPageNext = (currentPage/pageLimit) * pageLimit + pageLimit + 1;
+		if(currentPage % pageLimit == 0){
+			currentPageNext = currentPageNext - pageLimit;
+		}
+		
+		startPage = currentPageSetup + 1;
+		endPage = startPage + (pageLimit - 1);
+		if(startPage == totalPage){
+			endPage = startPage;
+		}
+		if(endPage > totalPage){
+			endPage = totalPage;
+		}
 %>
-
-
 <div class="Tour_list">
 	<form action="/yuha_jsp2021/main.jsp" id="search_form" method="get">
 		<input type="hidden" name="target" value="tour_list"/>
@@ -114,8 +83,9 @@ conn = DriverManager.getConnection(jdbcUrl, dbId, dbPass);
 	</form>
 	
    <ul class="Tour_list_box" >
-<% rs.absolute(start); %>
+     <% rs.absolute(start); %>
 			<% while(rs.getRow() <= end) { %>
+			<% //while(rs.next()){ %>
          <li>
 			<% //관광지 좋아요 버튼
 				sql = "select tour_seq, member_seq from tour_like where tour_seq = ? and member_seq = ?";
@@ -145,13 +115,17 @@ conn = DriverManager.getConnection(jdbcUrl, dbId, dbPass);
                </div>
             </a>
          </li>
-     <% rs.next();} %>
+      <%  rs.next();} %>
    </ul>
    
-	<div>
+   	<div>
 		<ul>
-			<% for(int i = startPage ; i <= endPage; i++) {%>
-				<a href="main.jsp?target=tour_list&pageNum=<%=i %>">
+			<% for(int i = startPage ; i <= endPage; i++) {
+				if(search == null) {
+					search = "";
+				}
+				%>
+				<a href="main.jsp?target=tour_list&pageNum=<%=i %>&search=<%=search%>">
 					<li><%=i %></li>
 				</a>
 			<% } %>
