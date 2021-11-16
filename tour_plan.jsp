@@ -145,7 +145,7 @@
 			    	origin: new naver.maps.Point(0,0),
 			    	anchor: new naver.maps.Point(11,35)
 			    },
-			    draggable: true
+			    //draggable: true
 			});
 
 		 markers.push(marker);

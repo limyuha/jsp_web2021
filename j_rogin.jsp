@@ -302,11 +302,13 @@ body {
 <div class="form">
   <div class="form-toggle"></div>
   <div class="form-panel one">
+  
     <div class="form-header">
       <h1>Account Login</h1>
     </div>
+    
     <div class="form-content">
-      <form method="post" action="action/login.jsp">
+      <form method="post" name="login" action="action/login.jsp">
         <div class="form-group">
           <label for="username">Username</label>
           <input type="text" id="username" name="id" required="required"/>
@@ -327,14 +329,16 @@ body {
     </div>
   </div>
   <div class="form-panel two">
+  
     <div class="form-header">
       <h1>Register Account</h1>
     </div>
+    
     <div class="form-content">
-      <form>
+      <form method="post" name="join" >
         <div class="form-group">
           <label for="username">Username</label>
-          <input type="text" id="username" name="username" required="required"/>
+          <input type="text" id="username" name="id" required="required"/>
         </div>
         <div class="form-group">
           <label for="password">Password</label>
@@ -349,7 +353,7 @@ body {
           <input type="email" id="email" name="email" required="required"/>
         </div>
         <div class="form-group">
-          <button type="submit">Register</button>
+          <button type="button" onclick="frmchk()">Register</button>
         </div>
       </form>
     </div>
@@ -383,6 +387,11 @@ $(document).ready(function() {
     }, 200);
   });
 });
+
+function frmchk(){
+		document.join.action="action/join.jsp";
+		document.join.submit();
+	}
 </script>
 </body>
 </html>

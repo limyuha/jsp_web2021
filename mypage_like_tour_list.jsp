@@ -9,7 +9,7 @@
 	pstmt.setInt(1, member_seq);
 	rs = pstmt.executeQuery();
 %>
-<p><i class="fas fa-heart" style="color:red;"></i> 좋아요 한 관광지 목록</p>
+<p><i class="fas fa-heart" style="color:red; margin-bottom:15px;"></i> 좋아요 한 관광지 목록</p>
 <div class="width_900 tour_like_list">
 	<% if(!rs.isBeforeFirst()) { //isBeforeFirst : 결과에 무언가 있는지 확인하고 커서 이동 X, rs.next() 사용하면 커서 이동하게 됨 %>	
 		<p>관광지가 마음에 든다면 좋아요를 해보세요~</p>
@@ -35,8 +35,49 @@
 					<button type="button" class="like_btn" onclick="location.href='action/tour_like_delete.jsp?&tour_seq=<%=rs.getInt("tour.seq")%>' ">
 						<i class="fas fa-heart"></i>
 					</button>
+					
+					<%
+						sql = "select seq from cart where member_seq = ? and tour_seq = ?";
+						pstmt = conn.prepareStatement(sql);
+						pstmt.setInt(1, member_seq);
+						pstmt.setInt(2, rs.getInt("tour.seq"));
+						ResultSet rs3 = pstmt.executeQuery();
+					%>
+					
+					<button type="button" class="basket_btn" data-seq="<%=rs.getInt("tour.seq")%>">
+					<% if(rs3.next()) { %> 
+						<i class="fas fa-cart-arrow-down like_tour_cart_icon like_cart-color"></i> 
+					<% } else { %> 
+						<i class="fas fa-cart-arrow-down like_tour_cart_icon"></i>
+					<% } %>
+					</button>
 				</li>
 			<% } %>
 		</ul>
 	<% } %>
 </div>
+<script>
+$('.basket_btn').click(function(){
+	var that = $(this); //ajax this 인식 못해서 변수에 넣고 사용
+		$.ajax({
+			url : 'action/basket_btn.jsp', //데이터 보낼 url
+			type : 'post',
+			data: 'tour_seq='+$(this).attr('data-seq'),
+			success: function(check) { //제일 마지막 문장
+				if($.trim(check) == '0') {
+					that.find('.fa-cart-arrow-down').removeClass('like_cart-color');
+					console.log(that.html());
+				} else if($.trim(check) == '1') {
+					that.find('.fa-cart-arrow-down').addClass('like_cart-color');
+					console.log(that.html());
+				}
+				//alert($.trim(check));
+				//console.log(check);
+			},
+			error: function(check) {
+				alert("실패");
+				console.log(check);
+			}
+		});
+	});
+</script>

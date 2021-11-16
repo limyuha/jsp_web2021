@@ -29,7 +29,7 @@
 		rs.last();
 		int rowCount = rs.getRow(); //tour테이클 컬럼카운트
 		rs.beforeFirst();
-		System.out.print(rowCount);
+		//System.out.print(rowCount);
 		
 		String pageNum = request.getParameter("pageNum");//넘어온 페이지 번호
 		int currentPage = 1; // 첫시작시 현재 페이지
@@ -38,7 +38,7 @@
 		int startPage; // 이 화면에서 보여줄 페이지중에서 가장 앞페이지
 		int endPage;
 
-		if(pageNum!=null){
+		if(pageNum != null){
 			currentPage = Integer.parseInt(pageNum); //넘어온 페이지번호가 존재할경우 현재페이지에 값 넣어주기	
 		}
 
@@ -117,18 +117,30 @@
          </li>
       <%  rs.next();} %>
    </ul>
-   
-   	<div>
+      
+   	<div class="numbtn">
 		<ul>
+			<% if(currentPage > 10){%>
+         		<li>
+         			<a href="main.jsp?target=tour_list&pageNum=<%=currentPageSetup %>"><i class="fas fa-chevron-left"></i></a>
+         		</li>
+  			<% } %>
+   
 			<% for(int i = startPage ; i <= endPage; i++) {
 				if(search == null) {
 					search = "";
 				}
 				%>
-				<a href="main.jsp?target=tour_list&pageNum=<%=i %>&search=<%=search%>">
-					<li><%=i %></li>
-				</a>
+				<li>
+					<a href="main.jsp?target=tour_list&pageNum=<%=i %>&search=<%=search%>"><%=i %></a>
+				</li>
 			<% } %>
+			
+			<li>
+			<% if((totalPage - startPage) >= 10 ) {%>
+         		<a href="main.jsp?target=tour_list&pageNum=<%=currentPageNext %>"><i class="fas fa-chevron-right"></i></a>
+  			<% } %>
+  			</li>
 		</ul>
 	</div>
 </div>
@@ -181,96 +193,3 @@ $('.like_btn').click(function() {
 	});
 	*/
 </script>
-<%	
-/*
-	 int pageNo = 0; // 페이지 번호
-	 int pageSize = 0; // 게시글 수
-	 
-	 int firstPageNo = 1; // 첫 번째 페이지 번호
-	 int prevPageNo; // 이전 페이지 번호
-	 int startPageNo; // 시작 페이지 (페이징 네비 기준)
-	 //int pageNo; // 페이지 번호
-	 int endPageNo; // 끝 페이지 (페이징 네비 기준)
-	 int nextPageNo; // 다음 페이지 번호
-	 int finalPageNo; // 마지막 페이지 번호
-	 //int totalCount; // 게시 글 전체 수
-	
-	 if ( totalCount == 0) return; // 게시 글 전체 수가 없는 경우
-	 if (pageNo == 0) { pageNo = 1; } // 기본 값 설정
-	 if (pageSize == 0) { pageSize = 10; } // 기본 값 설정
-	 
-     int finalPage = (totalCount + (pageSize - 1)) / pageSize; // 마지막 페이지
-     if (pageNo > finalPage) pageNo = finalPage; // 기본 값 설정
-     
-     if (pageNo < 0 || pageNo > finalPage) pageNo = 1; // 현재 페이지 유효성 체크
-
-     boolean isNowFirst = pageNo == 1 ? true : false; // 시작 페이지 (전체)
-     boolean isNowFinal = pageNo == finalPage ? true : false; // 마지막 페이지 (전체)
-
-     int startPage = ((pageNo - 1) / 10) * 10 + 1; // 시작 페이지 (페이징 네비 기준)
-     int endPage = startPage + 10 - 1; // 끝 페이지 (페이징 네비 기준)
-
-     if (endPage > finalPage) { // [마지막 페이지 (페이징 네비 기준) > 마지막 페이지] 보다 큰 경우
-         endPage = finalPage;
-     }
-
-     if (isNowFirst) {
-    	 prevPageNo = 1; // 이전 페이지 번호
-     } else {
-    	 prevPageNo = (((pageNo - 1) < 1 ? 1 : (pageNo - 1))); // 이전 페이지 번호
-     }
-
-     //this.setStartPageNo(startPage); // 시작 페이지 (페이징 네비 기준)
-     //this.setEndPageNo(endPage); // 끝 페이지 (페이징 네비 기준)
-
-     if (isNowFinal) {
-    	 nextPageNo = finalPage; // 다음 페이지 번호
-     } else {
-    	 nextPageNo = (((pageNo + 1) > finalPage ? finalPage : (pageNo + 1))); // 다음 페이지 번호
-     }
-
-     //this.setFinalPageNo(finalPage); // 마지막 페이지 번호
-	 
-	*/
-	
-	 /*
-	 if (this.totalCount == 0) return; // 게시 글 전체 수가 없는 경우
-     if (this.pageNo == 0) this.setPageNo(1); // 기본 값 설정
-     if (this.pageSize == 0) this.setPageSize(10); // 기본 값 설정
-
-     int finalPage = (totalCount + (pageSize - 1)) / pageSize; // 마지막 페이지
-     if (this.pageNo > finalPage) this.setPageNo(finalPage); // 기본 값 설정
-
-     if (this.pageNo < 0 || this.pageNo > finalPage) this.pageNo = 1; // 현재 페이지 유효성 체크
-
-     boolean isNowFirst = pageNo == 1 ? true : false; // 시작 페이지 (전체)
-     boolean isNowFinal = pageNo == finalPage ? true : false; // 마지막 페이지 (전체)
-
-     int startPage = ((pageNo - 1) / 10) * 10 + 1; // 시작 페이지 (페이징 네비 기준)
-     int endPage = startPage + 10 - 1; // 끝 페이지 (페이징 네비 기준)
-
-     if (endPage > finalPage) { // [마지막 페이지 (페이징 네비 기준) > 마지막 페이지] 보다 큰 경우
-         endPage = finalPage;
-     }
-
-     this.setFirstPageNo(1); // 첫 번째 페이지 번호
-
-     if (isNowFirst) {
-         this.setPrevPageNo(1); // 이전 페이지 번호
-     } else {
-         this.setPrevPageNo(((pageNo - 1) < 1 ? 1 : (pageNo - 1))); // 이전 페이지 번호
-     }
-
-     this.setStartPageNo(startPage); // 시작 페이지 (페이징 네비 기준)
-     this.setEndPageNo(endPage); // 끝 페이지 (페이징 네비 기준)
-
-     if (isNowFinal) {
-         this.setNextPageNo(finalPage); // 다음 페이지 번호
-     } else {
-         this.setNextPageNo(((pageNo + 1) > finalPage ? finalPage : (pageNo + 1))); // 다음 페이지 번호
-     }
-
-     this.setFinalPageNo(finalPage); // 마지막 페이지 번호
- }
- */
-%>

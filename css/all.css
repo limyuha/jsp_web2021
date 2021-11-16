@@ -17,6 +17,7 @@ body, h1, h2, h3, h4, h5, h6, input, textarea, select, a, p, spen, li{font-famil
 .margin100{margin-right:100px;}
 
 .paddingtop40{padding-top:40px;}
+.paddingright10{padding-right:10px;}
 
 .fa-map-marker-alt{color:black;}
 
@@ -217,9 +218,11 @@ body, h1, h2, h3, h4, h5, h6, input, textarea, select, a, p, spen, li{font-famil
 .mypage_body .mypage_result .tour_like_list ul li a .info_box{position: absolute; bottom:0px; left:0px; background-color: rgba(0,0,0,0.5); width:inherit; height:50px;}
 .mypage_body .mypage_result .tour_like_list ul li a .info_box p{padding-left:0px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;} /* 패딩 초기화 */
 	.mypage_body .mypage_result .tour_like_list ul li{position:relative;}
-	.mypage_body .mypage_result .tour_like_list ul li .like_btn{position:absolute; top:6px; right:6px; cursor:pointer;}
+	.mypage_body .mypage_result .tour_like_list ul li .like_btn{position:absolute; top:6px; right:10px; cursor:pointer;}
 	.mypage_body .mypage_result .tour_like_list ul li .like_btn .fa-heart.fas {color:red; font-size:20px;} 
 
+.like_tour_cart_icon{position:absolute; top:30px; right:10px; cursor:pointer; font-size:20px; color: #BDBDBD;}
+.like_cart-color{color:#489CFF;}
 
 /* Schedule_list.jsp / 스케줄 리스트 */
 	.schedule_list{margin:0 auto;  position:relative;}
@@ -343,6 +346,13 @@ body, h1, h2, h3, h4, h5, h6, input, textarea, select, a, p, spen, li{font-famil
 	.Tour_list .search_box .search{border:1px solid; width:600px; height:50px; padding-left:40px;}
 	.Tour_list .search_box .search_btn{width:70px; height:50px; background:black; color:white; font-weight:bold; vertical-align:top; margin-left:10px;}
 	
+	/* 페이징 번호 / 버튼 */
+	.Tour_list .numbtn{text-align:center;}
+	.Tour_list .numbtn ul{display:inline-block;}
+	.Tour_list .numbtn ul li{float:left; margin:10px;}
+	.Tour_list .numbtn ul li a{color:black;}
+	.Tour_list .numbtn ul li a .fa-chevron-left{color:black; font-size:15px;}
+	.Tour_list .numbtn ul li a .fa-chevron-right{color:black; font-size:15px;}
 /* Tour_page / 관광지 상세 페이지 */
 	/* body div */
 	.tour_page{margin:auto; position:relative;}
@@ -359,6 +369,10 @@ body, h1, h2, h3, h4, h5, h6, input, textarea, select, a, p, spen, li{font-famil
 	.fa-chevron-right{font-size:24px; color:white;}
 
 	.tour_page_box .hit{ position:absolute; top:12px; right:31px; color:#8C8C8C;}
+	
+	.tour_page .tour_page_box table{margin-left:40px; margin-top:25px;}
+	.tour_page .tour_page_box table tr td{text-align:left;}
+	
 .slick-dots
 {
     position: absolute;
@@ -457,7 +471,7 @@ body, h1, h2, h3, h4, h5, h6, input, textarea, select, a, p, spen, li{font-famil
 	.tour_page_simple_text{padding-top:20px;}
 	
 	/* 장바구니 버튼 / 아이콘 */
-	.tour_page_cart_icon{cursor: pointer; font-size:28px; position:absolute; top:125px; right:77px; color:darkgray;}
+	.tour_page_cart_icon{cursor: pointer; font-size:28px; position:absolute; top:87px; right:77px; color:darkgray;}
 	.tour_page_cart_icon:hover{color:pink;}
 	
 	/* 지도 */

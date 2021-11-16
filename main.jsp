@@ -40,7 +40,8 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <title>Insert title here</title>
 <style> 
-	body{background:#FFFAFA;} /* 눈색 */
+	/* body{background:#FFFAFA;}  눈색 */
+	body{background:white;}
 </style>
 </head>
 <body>

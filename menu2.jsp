@@ -12,7 +12,7 @@
 		<ul>
 			<% if (id == null) { %>
 			<li><a href="main.jsp?target=tour_list">명소</a></li>
-            <li><a href="main.jsp?target=schedule_share_board">스케줄 공유</a></li>
+            <li><a href="main.jsp?target=schedule_share_board">스케줄</a></li>
             <li><a href="main.jsp?target=tour_support">여행 지원</a></li>
             <li class="user"><a href="main.jsp?target=j_rogin"><i class="far fa-user"> LOG IN</i></a></li>
             <% } else { %>

@@ -16,7 +16,7 @@
 			session.setAttribute("seq", rs.getInt("seq")); // 세션 seq에 회원의 seq값 저장
 			session.setAttribute("id", rs.getString("id"));
 			//out.println(session.getAttribute("seq"));
-			response.sendRedirect("/jsp_web2021/main.jsp?target=tour_list"); //로그인 성공시 페이지 이동
+			response.sendRedirect("/jsp_web2021/main.jsp"); //로그인 성공시 페이지 이동
 			
 		} else {
 			%>

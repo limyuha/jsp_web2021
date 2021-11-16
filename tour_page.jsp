@@ -9,7 +9,7 @@
 	rs = pstmt.executeQuery();
 	
 	ResultSet rs2 = null;
-	sql = "select place_name, simple_content, tour_url, place_x, place_y, place_hit from tour where seq = ?";
+	sql = "select place_name, simple_content, tour_url, place_x, place_y, place_hit, us_time, park, pet, card from tour where seq = ?";
 	pstmt = conn.prepareStatement(sql);
 	pstmt.setInt(1, tour_seq);
 	rs2= pstmt.executeQuery();
@@ -76,21 +76,52 @@
 			
 			<p class="float_left bold keyword_pd">#전통 #관광지 #문화재</p>
 
-			<p class="bold font_size25 paddingtop40"><%=rs2.getString("place_name")%></p>
+			<p class="bold font_size25"><%=rs2.getString("place_name")%></p>
 
 			<hr style="width: 80%;" />
 
-			<ul class="float_left bold ta text_pd ">
-				<li class="padding-bottom10">이용시간</li>
-				<li class="padding-bottom10">운영 요일</li>
-				<li class="padding-bottom10">이용요금</li>
-			</ul>
-
-			<ul class="float_left ta">
-				<li class="padding-bottom10">24시간</li>
-				<li class="padding-bottom10">연중무휴</li>
-				<li class="padding-bottom10">무료</li>
-			</ul>
+			<table>
+					<tr>
+						<td class="bold">
+							이용시간
+						</td>
+						<td>
+							<%=rs2.getString("us_time")%>
+						</td>
+					</tr>
+					<tr>
+						<td class="bold">
+							주차시설
+						</td>
+						<td>
+							<%=rs2.getString("park")%>
+						</td>
+					</tr>
+					<tr>
+						<td class="bold">
+							주차시설
+						</td>
+						<td>
+							<%=rs2.getString("park")%>
+						</td>
+					</tr>
+					<tr>
+						<td class="bold" style="width:190px;">
+							애완동물 동반 가능 여부
+						</td>
+						<td>
+							<%=rs2.getString("pet")%>
+						</td>
+					</tr>
+					<tr>
+						<td class="bold">
+							신용카드 가능 여부
+						</td>
+						<td>
+							<%=rs2.getString("card")%>
+						</td>
+					</tr>
+			</table>
 
 			<button type="button" class="basket_button"
 				onclick="location.href='main.jsp?target=action/tour_page_basket_button&tour_seq=<%=tour_seq%>' ">
@@ -102,13 +133,12 @@
 								pstmt.setInt(1, member_seq);
 								pstmt.setInt(2, tour_seq);
 								rs3 = pstmt.executeQuery();
-						 			if(rs3.next()) { %> <i
-					class="fas fa-cart-arrow-down tour_page_cart_icon"
-					style="color: #A50000;"></i> <% } else { %> <i
-					class="fas fa-cart-arrow-down tour_page_cart_icon cart-color"></i>
-				<% } 
-						   } else { %> <i
-					class="fas fa-cart-arrow-down tour_page_cart_icon cart-color"></i>
+						 			if(rs3.next()) { %> 
+						 			<i class="fas fa-cart-arrow-down tour_page_cart_icon" style="color:#FF2424;"></i> 
+						 			<% } else { %> 
+						 			<i class="fas fa-cart-arrow-down tour_page_cart_icon"></i>
+									<% } 
+						   } else { %> <i class="fas fa-cart-arrow-down tour_page_cart_icon"></i>
 				<% } %> </spen>
 			</button>
 		</div>
