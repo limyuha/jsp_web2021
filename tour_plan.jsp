@@ -81,7 +81,7 @@
 								</div>
 								
 								<div class="tour_detail_box">
-									<p><spen>관광지 이름 :</spen><%=rs.getString("tour.place_name")%></p>
+									<%=rs.getString("tour.place_name")%></p>
 									<p class="adress">주소 : <%=rs.getString("tour.tour_url")%></p>
 								</div>
 								
@@ -113,11 +113,18 @@
 			
 			<form class="check_box" id="infoForm">
 				<div class="plan_mini_box">
-					<p><spen class="bold">* 스케줄 이름 :</spen>
-						<input type="text" placeholder=" 예시 ) 서울 데이트 코스" name="schedule_name" class="plan_input_box"/></p>
-						<spen class="bold">* 저장한 스케줄 장바구니에서 삭제하기 </spen><input type="checkbox" name="check" value="delete"/>
-							<!--<input type="button" id="save" value="저장하기"/>-->
-							<button type="button" class="save_btn" id="save">저장하기</button>	
+					<p>
+						<spen class="schedule_name">
+							스케줄 이름 :
+							<input type="text" placeholder=" 예시 ) 서울 데이트 코스" name="schedule_name" class="plan_input_box"/>
+						</spen>
+						<spen class="delete_spen">
+							<input type="checkbox" name="check" value="delete"/> 
+							저장한 스케줄 장바구니에서 삭제하기
+						</spen>
+						<!--<input type="button" id="save" value="저장하기"/>-->
+						<button type="button" class="save_btn" id="save">저장하기</button>	
+					</p>
 				</div>
 			</form>
 		</div>

@@ -66,7 +66,7 @@
 	
 	<hr>
 	
-	<p style="text-align:left;">최신순</p>
+	<p style="text-align:left; margin-bottom:10px;">최신순</p>
 	<ul class="share_board_box">
 		<% while(rs.next()) { %>
 			<li>

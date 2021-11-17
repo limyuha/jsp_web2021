@@ -48,5 +48,9 @@
 	<jsp:include page="menu2.jsp" flush="false"/>
 
 	<jsp:include page="<%=targetpage%>" flush="false"/>
+	
+	<div class="footer">
+		<jsp:include page="footer.jsp" flush="true"/>
+	</div>
 </body>
 </html>

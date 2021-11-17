@@ -21,14 +21,11 @@ body, h1, h2, h3, h4, h5, h6, input, textarea, select, a, p, spen, li{font-famil
 
 .fa-map-marker-alt{color:black;}
 
-/* Top.jsp / 상단 */
-/*.top .font_color{color:blue;}
-.login{position:absolute; top:33px; right:93px;}*/
-
-/* main_Body.jsp / 메인 바디 */
-.main_body{margin:auto;  position:relative;}
-.main_body .title{text-align:center; font-weight:bold; font-size:30px; margin-bottom:20px; color:black; margin-top:40px;}
-.main_body .place_box{width:1200px; margin:0px auto;}
+/* main_body.jsp / 메인 바디 */
+.main_body{margin:0 auto;  position:relative; clear:both;}
+.main_body .title{clear:both; text-align:center; font-weight:bold; font-size:30px; margin-bottom:20px; color:black; margin-top:40px;}
+/* .main_body .place_box{width:1200px;} */
+.main_body .place_box{clear:both; height:500px;}
 .main_body .place_box li{width:380px; float:left;}
 .main_body .place_box li a .img_box{width:inherit; height:300px;}
 .main_body .place_box li a .img_box img{width:100%; height:100%;}
@@ -36,6 +33,17 @@ body, h1, h2, h3, h4, h5, h6, input, textarea, select, a, p, spen, li{font-famil
 .main_body .place_box li:nth-child(2){margin-right:30px; margin-left:30px;}
 .main_body .place_box li a div .name_title{font-weight:bold; font-size:30px; color:#A6A6A6; margin-top:20px; margin-bottom:40px;}
 .main_body .place_box li a div .content{font-size:15px; color:black; width:300px; margin:0 auto; height:25px; display:-webkit-box; overflow: hidden; white-space:normal; -webkit-line-clamp:1; -webkit-box-orient:vertical;}
+
+/* footer.jsp / 하단 */
+.footer{clear:both; background:white; height:200px; border-top:1px solid #EAEAEA; margin-top:100px; padding:25px;}
+.footer div{text-align:center;}
+.footer div button{border-radius:50%; background:#3D3D3D; padding:10px; width:45px; height:45px; margin:7px;}
+.footer div button i{color:white; font-size:20px;}
+.footer div p spen{width:70px;}
+.footer .table_box{margin-top:40px;}
+.footer .table_box table{margin:0 auto;}
+.footer .table_box table tr .title{width:80px; font-weight:bold;}
+.footer .table_box table tr td{text-align:left;}
 
 /* 레인보우 컬러 */
 .fa-crown{ background-image: linear-gradient(90deg, red, orange, yellow, green, blue, navy, purple);
@@ -179,7 +187,7 @@ body, h1, h2, h3, h4, h5, h6, input, textarea, select, a, p, spen, li{font-famil
 .menu2_box ul .dropdown:hover .dropdown-content {display: block; background-color:#ddd;}
  
 /* mypage.jsp / 마이페이지 */
-.mypage_body{margin:0px auto;}
+.mypage_body{margin:0px auto; height:740px;}
 .mypage_body .mypage_menu{border-right:1px solid gray; float:left; width:400px; height:500px;}
 .mypage_body .mypage_menu p{padding-left:40px; margin-top:10px; font-size:35px;}
 .mypage_body .mypage_menu p a{color:black;}
@@ -304,9 +312,14 @@ body, h1, h2, h3, h4, h5, h6, input, textarea, select, a, p, spen, li{font-famil
 	.share_board .top3_box li a .top3_schedule_name_box{position:absolute; top:-50px; left:0px; text-align:center; width:100%;}
 	.share_board .top3_box li a .top3_schedule_name_box .fa-hand-holding-heart{color:#F15F5F;}
 	
+	.share_board_box{height:600px;}
 	.share_board_box li {float:left; width:200px; height:250px; box-shadow: 0 1px 3px 0 hsla(0,0%,86.3%,.3); border-radius: 4px; border: 1px solid #d9d9d9;
 						margin-right:40px; margin-bottom:30px; box-sizing:border-box;}
-	.share_board_box li:nth-child(6), .share_board_ul li:nth-child(12){margin-right:0px; margin-bottom:0px;} /* 6번째 12번째요소 초기화 */
+	.share_board_box li:nth-child(6), 
+	.share_board_box li:nth-child(12), 
+	.share_board_box li:nth-child(24){margin-right:0px; margin-bottom:0px;} /* 6번째 12번째 24번째 요소 초기화 */
+	
+	
 	.share_board .share_board_box li a{width:100%; color:black;} /* div, img 다 a 안에 갇혀 있기 때문에 a에 너비 값 주기*/
 	.share_board .share_board_box li .img_box{height:200px; overflow:hidden;} /* overflow:hidden: 넘어간 것 가려줌,가둠 */
 	.share_board .share_board_box li .img_box img{width:100%;height:100%;}
@@ -320,9 +333,10 @@ body, h1, h2, h3, h4, h5, h6, input, textarea, select, a, p, spen, li{font-famil
 
 /* Tour_list.jsp / 관광지 리스트 페이지 */
 	/* body div */
-	.Tour_list{width: 1098px; height: 1200px; margin:auto; padding:0;} /* margin:auto = 가운데정렬  260*/
+	.Tour_list{width: 1098px; height:1050px; margin:auto; padding:0;} /* margin:auto = 가운데정렬  260*/
 
 	/* 이미지, 설명 박스 */
+	.Tour_list_box{clear:both;}
 	.Tour_list_box li {float:left; width:250px; height:300px; margin-right:30px; margin-bottom:30px; background:black;
 						box-sizing:border-box; box-shadow:2px 3px 5px 0px; border-radius: 4px; border: 1px solid #d9d9d9;}
 	.Tour_list_box li:nth-child(4), .Tour_list_box li:nth-child(8){margin-right:0;} /* 4번째 8번째요소 초기화 */
@@ -347,12 +361,12 @@ body, h1, h2, h3, h4, h5, h6, input, textarea, select, a, p, spen, li{font-famil
 	.Tour_list .search_box .search_btn{width:70px; height:50px; background:black; color:white; font-weight:bold; vertical-align:top; margin-left:10px;}
 	
 	/* 페이징 번호 / 버튼 */
-	.Tour_list .numbtn{text-align:center;}
-	.Tour_list .numbtn ul{display:inline-block;}
-	.Tour_list .numbtn ul li{float:left; margin:10px;}
-	.Tour_list .numbtn ul li a{color:black;}
-	.Tour_list .numbtn ul li a .fa-chevron-left{color:black; font-size:15px;}
-	.Tour_list .numbtn ul li a .fa-chevron-right{color:black; font-size:15px;}
+	.Tour_list .num_box{text-align:center; clear:both;}
+	.Tour_list .num_box ul{display:inline-block;}
+	.Tour_list .num_box ul li{float:left; margin:10px;}
+	.Tour_list .num_box ul li a{color:black;}
+	.Tour_list .num_box ul li a .fa-chevron-left{color:black; font-size:15px;}
+	.Tour_list .num_box ul li a .fa-chevron-right{color:black; font-size:15px;}
 /* Tour_page / 관광지 상세 페이지 */
 	/* body div */
 	.tour_page{margin:auto; position:relative;}
@@ -525,9 +539,14 @@ body, h1, h2, h3, h4, h5, h6, input, textarea, select, a, p, spen, li{font-famil
 	/* 하단 박스 */
 	.check_box{clear:both;}
 	/* 설명 박스 */
-	.check_box .plan_mini_box{width:860px; height:60px; box-shadow:3px 2px 5px -1px; padding:10px; float:left; margin-top:20px; line-height:35px; position: relative;}
+	.check_box .plan_mini_box{width:860px; height:80px; box-shadow:3px 2px 5px -1px; float:left; line-height:80px; position: relative; margin-top:30px;}
 	/* 저장 버튼 */
-	.check_box .plan_mini_box .save_btn{cursor: pointer; position: absolute; top:11px; left:345px; font-size:17px; font-weight:bold; width:100px; height:35px; background:gray; border-radius:5px;}
+	.check_box .plan_mini_box .schedule_name{margin-right:40px; margin-left:40px;}
+	.check_box .plan_mini_box .schedule_name input{height:30px;}
+	.check_box .plan_mini_box .delete_spen{margin-right:30px;}
+	.check_box .plan_mini_box .save_btn{cursor:pointer; font-size:18px; width:100px; background:#D5D5D5; border-radius:5px; height:40px; line-height:0px;}
+
+	.check_box .plan_mini_box .save_btn:hover{background:#E4F7BA;}
 	.check_box .plan_mini_box .plan_input_box{border:0.5px solid; border-radius:2px;}
 
 	/* 지도 */
@@ -544,11 +563,11 @@ body, h1, h2, h3, h4, h5, h6, input, textarea, select, a, p, spen, li{font-famil
 	.spanPlaceName{color:#8C8C8C; font-weight:bold; font-size:10px; position: absolute; top:-7px; left:-5px; width:100px;}
 
 /* tour_support / 여행 지원 */
-.tour_support{margin:0 auto;}
-.tour_support div ul li img{width:550px; height:300px;}
-.tour_support .title{font-size:30px; font-weight:bold;}
-.tour_support .sub_content{padding:25px 0px;}
-.tour_support div ul li:nth-child(2){padding:30px 0px;}
-.tour_support div ul a{position:relative;}
-.tour_support div ul li a spen{color:#fff; font-size:30px; font-weight:bold; position:absolute; bottom:45px; left:70px;}
+	.tour_support{margin:0 auto; height:1100px;}
+	.tour_support div ul li img{width:550px; height:300px;}
+	.tour_support .title{font-size:30px; font-weight:bold;}
+	.tour_support .sub_content{padding:25px 0px;}
+	.tour_support div ul li:nth-child(2){padding:30px 0px;}
+	.tour_support div ul a{position:relative;}
+	.tour_support div ul li a spen{color:#fff; font-size:30px; font-weight:bold; position:absolute; bottom:45px; left:70px;}
 			

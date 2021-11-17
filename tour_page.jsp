@@ -98,14 +98,6 @@
 						</td>
 					</tr>
 					<tr>
-						<td class="bold">
-							주차시설
-						</td>
-						<td>
-							<%=rs2.getString("park")%>
-						</td>
-					</tr>
-					<tr>
 						<td class="bold" style="width:190px;">
 							애완동물 동반 가능 여부
 						</td>

@@ -55,7 +55,7 @@
 	var container = document.getElementById('map'); //지도를 표시할 div
 	var mapOptions = {
 		    center: new naver.maps.LatLng(37.55134800394021, 126.98821586913124),
-		    zoom: 12
+		    zoom: 11
 		};
 	var map = new naver.maps.Map('map', mapOptions); //맵생성
 	
